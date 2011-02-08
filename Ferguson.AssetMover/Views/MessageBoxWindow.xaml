@@ -1,0 +1,38 @@
+﻿<Window x:Class="Ferguson.AssetMover.Views.MessageBoxWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="MessageBoxWindow"  Height="400" Width="600" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ControlTemplate x:Key="KeyboardButtonTemplate" TargetType="{x:Type Button}">
+            <Button Tag="{TemplateBinding Tag}" Margin="2" IsCancel="{TemplateBinding IsCancel}">
+                <Viewbox>
+                    <TextBlock Text="{TemplateBinding Tag}" />
+                </Viewbox>
+            </Button>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid Background="Black">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Viewbox  Margin="10">
+            <Image Source="../Images/Symbol-Delete.png" />
+        </Viewbox>
+        <Viewbox  Grid.Column="1"  Margin="10">
+            <TextBlock Text="{Binding MessageHeader}" Width="200" Foreground="White" TextWrapping="Wrap" />
+        </Viewbox>
+
+        <Viewbox Grid.Row="1" Grid.ColumnSpan="2" Margin="10">
+            <TextBlock Text="{Binding MessageText}" Foreground="White" FontWeight="Bold" Width="250" TextWrapping="Wrap" />
+        </Viewbox>
+
+        <Button Grid.Row="2" Grid.Column="0" Margin="10" Tag="Ok" HorizontalAlignment="Center" Grid.ColumnSpan="2" Width="100" Background="Green" Template="{StaticResource KeyboardButtonTemplate}" Click="OKButton_Click" />
+    </Grid>
+</Window>

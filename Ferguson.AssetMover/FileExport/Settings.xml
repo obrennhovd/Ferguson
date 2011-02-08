@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClientSettings>
+  <LocalDisk>X:</LocalDisk>
+  <BufferFilePath>C:\Ferguson\AssetMover\Buffer.xml</BufferFilePath>
+  <BackupPath>C:\Ferguson\AssetMover\</BackupPath>
+  <ExportPath>\\fil-ferguson\ops-scans</ExportPath>
+  <!--<ExportPath>\\BYGGMESTER\Ferguson</ExportPath>-->
+  <!--<ExportPath>\\BRIAN-WEBSTEP\Ferguson</ExportPath>-->
+  <Username>ute</Username>
+  <Password>uteute</Password>
+  <CompactKeys>
+    <CompactKey>FCC-</CompactKey>
+    <CompactKey>FOT-</CompactKey>
+    <CompactKey>FHH-</CompactKey>
+    <CompactKey>FSM-</CompactKey>
+    <CompactKey>FMS-</CompactKey>
+    <CompactKey>FST4-</CompactKey>
+    <CompactKey>FST3-</CompactKey>
+    <CompactKey>FTF-</CompactKey>
+    <CompactKey>FDB-</CompactKey>
+    <CompactKey>FFB-</CompactKey>
+    <CompactKey>FCB-</CompactKey>
+    <CompactKey>FRT-</CompactKey>
+    <CompactKey>FTB-</CompactKey>
+    <CompactKey>V</CompactKey>
+  </CompactKeys>
+</ClientSettings>

@@ -1,0 +1,84 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2006" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Ferguson.AssetMover.Client.Views.WindowHeaderBar"
+    Title="WindowCloseButton" Width="Auto" Height="35" HorizontalAlignment="Stretch" Background="#71000000" Foreground="#F3FFFFFF"
+    Loaded="OnLoaded" x:Name="HeaderBarPage">
+
+    <Page.Resources>
+        <ControlTemplate x:Key="ContentControlControlTemplate1" TargetType="{x:Type ContentControl}" >
+            <Grid x:Name="Grid" >
+                <Rectangle RadiusX="10" RadiusY="10" x:Name="Rectangle" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1" Margin="5,5,5,5"/>
+                <ContentPresenter x:Name="ContentPresenter" HorizontalAlignment="Center" Margin="5,5,0,5" VerticalAlignment="Center" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"/>
+            </Grid>
+        </ControlTemplate>
+        <ObjectDataProvider x:Key="DateTimeDS" d:IsDataSource="True" ObjectType="{x:Type System:DateTime}"/>
+
+        <LinearGradientBrush x:Key="TriGradientGreyButton" x:Name="TriGradientGreyButton" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#4C585859" Offset="0.587"/>
+            <GradientStop Color="#0F939393" Offset="0.774"/>
+            <GradientStop Color="#4C02020A" Offset="0.88"/>
+        </LinearGradientBrush>
+    </Page.Resources>
+    <Grid Width="Auto" Height="35" HorizontalAlignment="Stretch" Margin="0,0,0,0" x:Name="HeaderBar_Grid">
+
+        <Grid HorizontalAlignment="Left" Margin="0.5,-3,0,-8" Width="51" OpacityMask="#FF000000" x:Name="HomeGrid">
+            <ContentControl x:Name="Home_Button" Visibility="Hidden" MouseLeave="ButtonMouseLeave" MouseEnter="ButtonMouseEnter" Template="{DynamicResource ContentControlControlTemplate1}" Foreground="#FFFFFFFF" KeyDown="OnHomeButtonClick" MouseDown="OnHomeButtonClick" TabIndex="1" FontSize="20" BorderBrush="#FF0C0202" Background="{x:Null}" RenderTransformOrigin="-15.596,0.786" Width="47" ToolTip="Return to Home Screen" HorizontalAlignment="Left" Margin="0,-2.668,0,2.668">
+
+                <Image x:Name="HomeImage" OpacityMask="#FF000000" Width="37.812" Height="31.831" Source="../Images/home.ico"/>
+            </ContentControl>
+        </Grid>
+        
+        <StackPanel d:LayoutOverrides="Margin" HorizontalAlignment="Right" Margin="388.262,-0.415,8,0" Orientation="Horizontal">
+            <Button Content="Inbound Report" Click="OpenReportButton_Click" Margin="30 0 0 0"  Padding="10 0 10 0"/>
+            <Button Content="Outbound Report" Click="OpenReportButton_Click" Margin="30 0 0 0"  Padding="10 0 10 0"/>
+            
+            <Grid x:Name="PowerNetworkTimeGrid" Width="Auto" HorizontalAlignment="Right" Height="35">
+
+                <ContentControl x:Name="HelpButton" MouseLeave="ButtonMouseLeave" MouseEnter="ButtonMouseEnter" Template="{DynamicResource ContentControlControlTemplate1}" Foreground="#FFFFFFFF" KeyDown="OnHelpButtonClick" MouseDown="OnHelpButtonClick" TabIndex="1" FontSize="20" Width="46" BorderBrush="#FF000000" d:LayoutOverrides="Width, Margin" HorizontalAlignment="Right" Margin="0,-0.066,-3.167,0" Background="{DynamicResource TriGradientGreyBrush}" ToolTip="Show Application Help">
+                    <TextBlock x:Name="HelpText"  Text="?" TextWrapping="Wrap" FontFamily="Segoe UI" FontSize="28" Width="24.637" KeyDown="OnHelpButtonClick" MouseDown="OnHelpButtonClick" d:LayoutOverrides="Width" HorizontalAlignment="Right" Margin="0,-8,-7,-0.934" Height="38.066"/>
+                </ContentControl>
+
+                <Border Margin="84.465,3.19,38,3.19" x:Name="TimeBorder" MouseLeave="BorderMouseLeave" MouseEnter="BorderMouseEnter">
+
+                    <Label x:Name="TimeLabel" MouseLeftButtonUp="TimeStatusClick" Width="145" Background="{x:Null}" FontStyle="Normal" Foreground="#FFFFFDFD" ToolTip="Current System Time" Content="Current Time &amp; Date" FontSize="14"/>
+
+                </Border>
+
+                <Border HorizontalAlignment="Left" Margin="9,3.814,0,-0.495" Width="41.347" MouseLeave="BorderMouseLeave" MouseEnter="BorderMouseEnter" x:Name="PowerBorder" BorderBrush="#FF0C0202">
+                    <Grid>
+
+                        <Image MouseLeftButtonUp="PowerStatusClick" x:Name="PowerStatusIndicator" Width="Auto" Source="../Images/BatteryCritical.ico" OpacityMask="{x:Null}" d:LayoutOverrides="Width" Margin="0,0,12.666,3"/>
+
+                        <Image x:Name="ACPowerStatusIndicator" Width="Auto" Source="../Images/ACPower.ico" OpacityMask="{x:Null}" d:LayoutOverrides="Margin" Margin="12.666,3,0,0"/>
+
+                    </Grid>
+                </Border>
+                <Border HorizontalAlignment="Left" Margin="51,3.814,0,1.721" Width="29.465" MouseLeave="BorderMouseLeave" MouseEnter="BorderMouseEnter" x:Name="NetworkBorder" BorderBrush="#FF0C0202">
+
+                    <Image x:Name="NetworkStatusIndicator" MouseLeftButtonUp="NetworkStatusClick" OpacityMask="{x:Null}" Width="Auto" Height="29.465" Source="../Images/WirelessLow.ico"/>
+
+                </Border>
+
+            </Grid>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Width="Auto" Height="35.036">
+
+                <ContentControl x:Name="MinimizeControl" MouseLeave="ButtonMouseLeave" MouseEnter="ButtonMouseEnter" Template="{DynamicResource ContentControlControlTemplate1}" Foreground="#FFFFFFFF" KeyDown="OnMinButtonClick" MouseDown="OnMinButtonClick" TabIndex="1" FontSize="20" Width="46" Background="{DynamicResource TriGradientGreyButton}" BorderBrush="#FF000000" Height="35" ToolTip="Minimize Application">
+                    <TextBlock x:Name="MinimizeText" TextWrapping="Wrap" FontFamily="Marlett" FontSize="48" HorizontalAlignment="Left" Margin="0,2,10,0" VerticalAlignment="Bottom" Height="29">q</TextBlock>
+                </ContentControl>
+
+                <ContentControl x:Name="FullScreen_Button" MouseLeave="ButtonMouseLeave" MouseEnter="ButtonMouseEnter" Template="{DynamicResource ContentControlControlTemplate1}" Foreground="#FFFFFFFF" KeyDown="OnFullScreenClick" MouseDown="OnFullScreenClick" TabIndex="1" FontSize="18" BorderBrush="#FF000000" Background="{DynamicResource TriGradientGreyButton}" Width="46" Height="35" HorizontalAlignment="Right" ToolTip="Toggle Between Full Screen &amp; Windowed Mode">
+                    <TextBlock x:Name="FullScreentext" TextWrapping="Wrap" FontFamily="Marlett" FontSize="24" Text="1" d:LayoutOverrides="Width" Width="24" Height="27.333"/>
+                </ContentControl>
+
+                <ContentControl x:Name="CloseControl" MouseLeave="ButtonMouseLeave" MouseEnter="ButtonMouseEnter" Template="{DynamicResource ContentControlControlTemplate1}" Foreground="#FFFFFFFF" KeyDown="OnCloseButtonClick" MouseDown="OnCloseButtonClick" TabIndex="1" Width="47" FontSize="20" Background="{DynamicResource TriGradientGreyBrush}" BorderBrush="#FF000000" Height="35" ToolTip="Close the Application">
+                    <TextBlock x:Name="CloseText"  Text="r" TextWrapping="Wrap" FontFamily="Marlett" FontSize="22" d:LayoutOverrides="Width" HorizontalAlignment="Left" Margin="-4,0,0,0" Width="22" Height="21.999"/>
+                </ContentControl>
+
+            </StackPanel>
+
+        </StackPanel>
+
+    </Grid>
+</Page>

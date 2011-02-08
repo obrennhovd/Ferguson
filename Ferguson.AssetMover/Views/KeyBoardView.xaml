@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="Ferguson.AssetMover.Client.Views.KeyBoardView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    MinHeight="300" MinWidth="400">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="KeyboardButtonTemplate" TargetType="{x:Type Button}">
+            <Button Click="KeyboardButton_Click" Tag="{TemplateBinding Tag}" Margin="2">
+                <Viewbox>
+                    <TextBlock Text="{TemplateBinding Tag}" />
+                </Viewbox>
+            </Button>
+        </ControlTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition Width="0"  />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+
+        <Button Grid.Row="1" Grid.Column="0" Tag="A" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="1" Grid.Column="1" Tag="B" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="1" Grid.Column="2" Tag="C" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="1" Grid.Column="3" Tag="D" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="1" Grid.Column="4" Tag="E" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="1" Grid.Column="5" Tag="F" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="1" Grid.Column="6" Tag="G" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="1" Grid.Column="7" Tag="H" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="1" Grid.Column="8" Tag="I" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="2" Grid.Column="0" Tag="J" Template="{StaticResource KeyboardButtonTemplate}" />
+
+        <Button Grid.Row="2" Grid.Column="1" Tag="K" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="2" Grid.Column="2" Tag="L" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="2" Grid.Column="3" Tag="M" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="2" Grid.Column="4" Tag="N" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="2" Grid.Column="5" Tag="O" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="2" Grid.Column="6" Tag="P" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="2" Grid.Column="7" Tag="Q" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="2" Grid.Column="8" Tag="R" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="3" Grid.Column="0" Tag="S" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="3" Grid.Column="1" Tag="T" Template="{StaticResource KeyboardButtonTemplate}" />
+
+        <Button Grid.Row="3" Grid.Column="2" Tag="U" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="3" Grid.Column="3" Tag="V" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="3" Grid.Column="4" Tag="W" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="3" Grid.Column="5" Tag="X" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="3" Grid.Column="6" Tag="Y" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="3" Grid.Column="7" Tag="Z" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="3" Grid.Column="8" Tag="-" Template="{StaticResource KeyboardButtonTemplate}" />
+
+        <Button Grid.Row="1" Grid.Column="12" Tag="7" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="1" Grid.Column="13" Tag="8" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="1" Grid.Column="14" Tag="9" Template="{StaticResource KeyboardButtonTemplate}" />
+
+        <Button Grid.Row="2" Grid.Column="12" Tag="4" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="2" Grid.Column="13" Tag="5" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="2" Grid.Column="14" Tag="6" Template="{StaticResource KeyboardButtonTemplate}" />
+
+        <Button Grid.Row="3" Grid.Column="11" Tag="0" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="3" Grid.Column="12" Tag="1" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="3" Grid.Column="13" Tag="2" Template="{StaticResource KeyboardButtonTemplate}" />
+        <Button Grid.Row="3" Grid.Column="14" Tag="3" Template="{StaticResource KeyboardButtonTemplate}" />
+
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,116 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Collections.ObjectModel;
+using Ferguson.AssetMover.Client.Model;
+using Ferguson.AssetMover.Client.FileExport;
+using System.ComponentModel;
+
+namespace Ferguson.AssetMover.Client.Views
+{
+    /// <summary>
+    /// Interaction logic for ScreenView.xaml
+    /// </summary>
+    public partial class ScreenView : UserControl
+    {
+        public ScreenView()
+        {
+            InitializeComponent();
+            Loaded += new RoutedEventHandler(ScreenView_Loaded);
+            TransferManager.AssetMovementDeleted += new AssetMovementDeletedEventHandler(TransferManager_AssetMovementDeleted);
+        }
+
+        void TransferManager_AssetMovementDeleted(AssetMovement movement)
+        {
+            // if our the Assetmovement that was deleted is our current, we need to clear and reset.
+            if (CurrentAssetMovement.Equals(movement))
+            {
+                ResetCurrentAssetMovement();
+            }
+        }
+
+        void ScreenView_Loaded(object sender, RoutedEventArgs e)
+        {
+            ResetCurrentAssetMovement();
+        }
+
+        void ResetCurrentAssetMovement()
+        {
+            AssetMovement movement = new AssetMovement()
+            {
+                ArrivalDate = DateTime.Now
+            };
+            CurrentAssetMovement = movement;
+            this.DataContext = CurrentAssetMovement;
+        }
+
+        private AssetMovement currentAssetMovement;
+        public AssetMovement CurrentAssetMovement
+        {
+            get { return currentAssetMovement; }
+            set
+            {
+                if (currentAssetMovement != value)
+                {
+                    currentAssetMovement = value;
+                    this.DataContext = CurrentAssetMovement;
+                    UpdateEnterButtonStatus();
+                }
+            }
+        }
+
+        public void Input(string input)
+        {
+            CurrentAssetMovement.UnitNumber += input;
+            UpdateEnterButtonStatus();
+        }
+
+
+        private void BackspaceButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CurrentAssetMovement.UnitNumber.Length == 0) return;
+            CurrentAssetMovement.UnitNumber = CurrentAssetMovement.UnitNumber.Remove((CurrentAssetMovement.UnitNumber.Length - 1), 1);
+        }
+
+        // Commits the current movement to batch and reset the c
+        private void EnterButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Check whether the value was commited by IN or Out button.
+            var tag = (sender as Button).Tag;
+
+            CurrentAssetMovement.MovementType = Utilities.ConvertToMovemenetType(tag.ToString());
+
+            if (CurrentAssetMovement.Batch == null)
+            {
+                CurrentAssetMovement.Batch = TransferManager.CurrentBatch;
+            }
+
+            ResetCurrentAssetMovement();
+            UpdateEnterButtonStatus();
+        }
+
+        void UpdateEnterButtonStatus()
+        {
+            if (InputTextBox.Text.Length >= 4)
+            {
+                InButton.IsEnabled = true;
+                OutButton.IsEnabled = true;
+            }
+            else
+            {
+                InButton.IsEnabled = false;
+                OutButton.IsEnabled = false;
+            }
+        }
+    }
+}
