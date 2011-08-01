@@ -18,12 +18,12 @@
 
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
-                <RowDefinition />      
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="18*" />
                 <ColumnDefinition Width="10*"/>
-               
+
             </Grid.ColumnDefinitions>
 
             <Border  CornerRadius="10" Background="White" Padding="5"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
@@ -31,7 +31,7 @@
                     <TextBlock x:Name="InputTextBox" Text="{Binding UnitNumber}" Foreground="Black" />
                 </Viewbox>
             </Border>
-            
+
             <Grid Grid.Column="1" Margin="10" Grid.ColumnSpan="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*" />
@@ -41,7 +41,7 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                    <Button Grid.Row="0" Grid.ColumnSpan="2" Tag="Backspace" Template="{StaticResource KeyboardButton}" Click="BackspaceButton_Click" />
+                <Button Grid.Row="0" Grid.ColumnSpan="2" Tag="Backspace" Template="{StaticResource KeyboardButton}" Click="BackspaceButton_Click" />
                 <Button Grid.Row="1" Grid.Column="0" Tag="In" x:Name="InButton" Template="{StaticResource KeyboardButton}" IsEnabled="False" Click="EnterButton_Click" />
                 <Button Grid.Row="1" Grid.Column="1" Tag="Out" x:Name="OutButton" Template="{StaticResource KeyboardButton}" IsEnabled="False" Click="EnterButton_Click" />
             </Grid>

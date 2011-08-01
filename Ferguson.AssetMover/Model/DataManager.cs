@@ -20,7 +20,6 @@ namespace Ferguson.AssetMover.Client.Model
 
         private void CreatePrefixes()
         {
-            ;
             Prefixes = SettingsManager.ClientSettings.CompactKeys;
         }
     }
