@@ -180,8 +180,9 @@
     <Compile Include="FileExport\Batch.cs" />
     <Compile Include="FileExport\BufferManager.cs" />
     <Compile Include="FileExport\NetworkDrive.cs" />
-    <Compile Include="FileExport\TransferManager.cs" />
+    <Compile Include="FileExport\Transfers.cs" />
     <Compile Include="Settings\ClientSettings.cs" />
+    <Compile Include="Settings\SettingsFile.cs" />
     <Compile Include="Settings\SettingsManager.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="Views\KeyBoardView.xaml.cs">
@@ -254,7 +255,7 @@
     <Resource Include="Images\WirelessNone.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="FileExport\Settings.xml">
+    <Resource Include="Settings\Settings.xml">
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>

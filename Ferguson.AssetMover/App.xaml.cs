@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
+using Ferguson.AssetMover.Client.Settings;
 using Ferguson.AssetMover.Views;
 
 namespace Ferguson.AssetMover.Client
@@ -14,9 +11,18 @@ namespace Ferguson.AssetMover.Client
     /// </summary>
     public partial class App : Application
     {
+
         public App()
         {
             this.DispatcherUnhandledException += new DispatcherUnhandledExceptionEventHandler(App_DispatcherUnhandledException);
+            _clientSettings = new SettingsLoader().GetClientSettings();
+            
+        }
+
+        private static ClientSettings _clientSettings;
+        public static ClientSettings ClientSettings
+        {
+            get { return _clientSettings;  }
         }
 
         private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

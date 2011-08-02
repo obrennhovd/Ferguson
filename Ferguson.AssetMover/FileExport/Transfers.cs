@@ -20,13 +20,11 @@ namespace Ferguson.AssetMover.Client.FileExport
     public delegate void CurrentBatchChangedEventHandler(Batch newBatch);
     public delegate void AssetMovementDeletedEventHandler(AssetMovement movement);
 
-    public class TransferManager
+    public class Transfers
     {
-        //TODO: Retrieve from settings
-        static string exportPath = @"C:\Ferguson\";
-
-        static int counter = 1;
-        static Batch currentBatch;
+        static readonly string exportPath = @"C:\Ferguson\";
+        static int _counter = 1;
+        static Batch _currentBatch;
         static ObservableCollection<Batch> transferredBatches = new ObservableCollection<Batch>();
         static ClientSettings clientSettings;
         private static BufferManager buffer = new BufferManager();
@@ -35,10 +33,11 @@ namespace Ferguson.AssetMover.Client.FileExport
         public static event CurrentBatchChangedEventHandler CurrentBatchChanged;
         public static event AssetMovementDeletedEventHandler AssetMovementDeleted;
 
-        static TransferManager()
+        static Transfers()
         {
-            exportPath = SettingsManager.ClientSettings.ExportPath;
-            clientSettings = SettingsManager.ClientSettings;
+            clientSettings = App.ClientSettings;
+            exportPath = App.ClientSettings.ExportPath;
+            
             CurrentBatch = new Batch(0);
             LoadBuffer();
         }
@@ -53,19 +52,19 @@ namespace Ferguson.AssetMover.Client.FileExport
 
         public static Batch CurrentBatch
         {
-            get { return currentBatch; }
+            get { return _currentBatch; }
             set
             {
-                if (currentBatch != value)
+                if (_currentBatch != value)
                 {
-                    if (currentBatch != null)
+                    if (_currentBatch != null)
                     {
-                        currentBatch.AssetMovements.CollectionChanged -= new NotifyCollectionChangedEventHandler(AssetMovements_CollectionChanged);
+                        _currentBatch.AssetMovements.CollectionChanged -= new NotifyCollectionChangedEventHandler(AssetMovements_CollectionChanged);
                     }
-                    currentBatch = value;
-                    currentBatch.AssetMovements.CollectionChanged += new NotifyCollectionChangedEventHandler(AssetMovements_CollectionChanged);
+                    _currentBatch = value;
+                    _currentBatch.AssetMovements.CollectionChanged += new NotifyCollectionChangedEventHandler(AssetMovements_CollectionChanged);
                     if (CurrentBatchChanged != null)
-                        CurrentBatchChanged(currentBatch);
+                        CurrentBatchChanged(_currentBatch);
                 }
             }
 
@@ -140,7 +139,7 @@ namespace Ferguson.AssetMover.Client.FileExport
 
                 // Adjust batches
                 TransferredBatches.Add(CurrentBatch);
-                CurrentBatch = new Batch(counter++);
+                CurrentBatch = new Batch(_counter++);
             }
             catch (System.IO.IOException ex)
             {

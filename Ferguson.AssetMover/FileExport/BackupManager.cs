@@ -21,7 +21,7 @@ namespace Ferguson.AssetMover.Client.FileExport
 
         public void Init()
         {
-            backupPath = SettingsManager.ClientSettings.BackupPath;
+            backupPath = App.ClientSettings.BackupPath;
             ValidateBackupPath();
             ValidateReportFiles();
         }

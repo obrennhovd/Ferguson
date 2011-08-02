@@ -11,46 +11,42 @@ using System.Reflection;
 
 namespace Ferguson.AssetMover.Client
 {
-    
-
     public class ContentManager
     {
-        private static Dictionary<Type, UserControl> viewCache = new Dictionary<Type, UserControl>();
-        private static UserControl activeView;
-        private static ContentControl activeArea;
-        private static MainWindow activeShell;
+        private static readonly Dictionary<Type, UserControl> ViewCache = new Dictionary<Type, UserControl>();
+        private static UserControl _activeView;
+        private static ContentControl _activeArea;
+        private static MainWindow _activeShell;
 
         public static ResourceDictionary Resources
         {
-            get { return activeShell.Resources; }
+            get { return _activeShell.Resources; }
         }
 
-        private static UserControl GetView<T>(Object dataContext) where T : new()
+        private static UserControl GetView<T>(Object dataContext) where T : UserControl, new() 
         {
             UserControl control;
-
-            if (viewCache.Keys.Contains(typeof(T)))
+            if (ViewCache.Keys.Contains(typeof(T)))
             {
-                control = viewCache[typeof(T)];
+                control = ViewCache[typeof(T)];
             }
             else
             {
-                control = new T() as UserControl;
-                viewCache.Add(typeof(T), control);
+                control = new T();
+                ViewCache.Add(typeof(T), control);
             }
-
             control.DataContext = dataContext;
-            activeView = control;
+            _activeView = control;
             return control;
         }
 
-        internal static void ChangeView<T>(object dataContext) where T : new()
+        internal static void ChangeView<T>(object dataContext) where T : UserControl, new()
         {
             UserControl control = GetView<T>(dataContext);
             ChangeMainContent(control);
         }
 
-        internal static void ChangeView<T>() where T : new()
+        internal static void ChangeView<T>() where T : UserControl, new()
         {
             ChangeView<T>(null);
         }
@@ -58,43 +54,43 @@ namespace Ferguson.AssetMover.Client
         private static void ChangeMainContent(UserControl control)
         {
             if (control is RegisteredElementsView)
-                control.DataContext = TransferManager.CurrentBatch;
+                control.DataContext = Transfers.CurrentBatch;
 
             // Disconnct eventhandler of current view
-            if (activeView != null && activeView is ITextProvider)
+            if (_activeView != null && _activeView is ITextProvider)
             {
-                (activeView as ITextProvider).TextInputOccured -= new TextInputHandler(activeShell.Screen.Input);
+                (_activeView as ITextProvider).TextInputOccured -= _activeShell.Screen.Input;
             }
 
             // Add eventhandler for textinput field
             if (control is ITextProvider)
             {
                 // Show screen
-                (control as ITextProvider).TextInputOccured += new TextInputHandler(activeShell.Screen.Input);
-                activeShell.screenViewRow.Height = new GridLength(2, GridUnitType.Star);
-                activeShell.contentViewRow.Height = new GridLength(4, GridUnitType.Star);
+                (control as ITextProvider).TextInputOccured += new TextInputHandler(_activeShell.Screen.Input);
+                _activeShell.screenViewRow.Height = new GridLength(2, GridUnitType.Star);
+                _activeShell.contentViewRow.Height = new GridLength(4, GridUnitType.Star);
             }
             else // Hide screen
             {
-                activeShell.screenViewRow.Height = new GridLength(0);
-                activeShell.contentViewRow.Height = new GridLength(6, GridUnitType.Star);
+                _activeShell.screenViewRow.Height = new GridLength(0);
+                _activeShell.contentViewRow.Height = new GridLength(6, GridUnitType.Star);
             }
 
-            activeView = control;
-            activeArea.Content = null;
-            activeArea.Content = control;
+            _activeView = control;
+            _activeArea.Content = null;
+            _activeArea.Content = control;
             
         }
 
         public static void ChangeScreenInput(AssetMovement movement)
         {
-            activeShell.Screen.CurrentAssetMovement = movement;
+            _activeShell.Screen.CurrentAssetMovement = movement;
         }
 
         internal static void SetShell(MainWindow shell)
         {
-            activeArea = shell.mainContentControl;
-            activeShell = shell;
+            _activeArea = shell.mainContentControl;
+            _activeShell = shell;
         }
 
         internal static void ChangeView(UserControl viewSelected)
@@ -104,7 +100,7 @@ namespace Ferguson.AssetMover.Client
 
         internal static void ChangeView(Type viewSelected)
         {
-            UserControl control = (UserControl)Assembly.GetAssembly(viewSelected).CreateInstance(viewSelected.FullName);
+            var control = (UserControl)Assembly.GetAssembly(viewSelected).CreateInstance(viewSelected.FullName);
             ChangeMainContent(control);
         }
     }

@@ -14,38 +14,38 @@ namespace Ferguson.AssetMover.Client.FileExport
     /// </summary>
     public class BufferManager
     {
-        private List<AssetMovement> buffer = new List<AssetMovement>();
-        private string filePath = @"C:\Ferguson\buffer.xml";
+        private List<AssetMovement> _buffer = new List<AssetMovement>();
+        private readonly string filePath = @"C:\Ferguson\buffer.xml";
 
         public BufferManager()
         {
-            this.filePath = SettingsManager.ClientSettings.BufferFilePath;
+            filePath = App.ClientSettings.BufferFilePath;
             Load();
         }
 
         public List<AssetMovement> GetMovements()
         {
-            return buffer.ToList();
+            return _buffer.ToList();
         }
 
         public List<AssetMovement> GetMovements(MovementType movementType)
         {
-            return buffer.Where(m => m.MovementType == movementType).ToList();
+            return _buffer.Where(m => m.MovementType == movementType).ToList();
         }
 
         public void AddElement(AssetMovement movement)
         {
-            if (buffer.Contains(movement)) return;
+            if (_buffer.Contains(movement)) return;
 
-            buffer.Add(movement);
+            _buffer.Add(movement);
             FlushBuffer();
         }
 
         public void RemoveElement(AssetMovement movement)
         {
-            if (!buffer.Contains(movement)) return;
+            if (!_buffer.Contains(movement)) return;
 
-            buffer.Remove(movement);
+            _buffer.Remove(movement);
             FlushBuffer();
         }
 
@@ -53,7 +53,7 @@ namespace Ferguson.AssetMover.Client.FileExport
         {
             foreach (var movement in movements)
             {
-                buffer.Remove(movement);
+                _buffer.Remove(movement);
             }
             FlushBuffer();
         }
@@ -74,7 +74,7 @@ namespace Ferguson.AssetMover.Client.FileExport
                                 UnitNumber = movement.Element("UnitNumber").Value,
                                 ArrivalDate = Convert.ToDateTime(movement.Element("ArrivalDate").Value)
                             };
-            buffer = movements.ToList();
+            _buffer = movements.ToList();
         }
 
         private void FlushBuffer()
@@ -83,7 +83,7 @@ namespace Ferguson.AssetMover.Client.FileExport
             var root = new XElement("AssetMovements");
             saveDocument.Add(root);
 
-            foreach (var movement in buffer)
+            foreach (var movement in _buffer)
             {
                 var element = new XElement("AssetMovement");
                 element.Add(new XElement("UnitNumber", movement.UnitNumber));

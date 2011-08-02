@@ -30,29 +30,29 @@ namespace Ferguson.AssetMover.Client
         public MainWindow()
         {
             InitializeComponent();
-            Loaded += new RoutedEventHandler(MainWindow_Loaded);
-            TransferManager.CurrentBatchChanged += new CurrentBatchChangedEventHandler(TransferManager_CurrentBatchChanged);
+            Loaded += MainWindowLoaded;
+            Transfers.CurrentBatchChanged += TransferManagerCurrentBatchChanged;
         }
 
-        void TransferManager_CurrentBatchChanged(Batch newBatch)
+        void TransferManagerCurrentBatchChanged(Batch newBatch)
         {
-            DataContext = TransferManager.CurrentBatch;
+            DataContext = Transfers.CurrentBatch;
         }
 
-        void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        void MainWindowLoaded(object sender, RoutedEventArgs e)
         {
             navigationButtons.Add(schemaViewButton);
             navigationButtons.Add(prefixViewButton);
             navigationButtons.Add(elementsListViewButton);
-            this.DataContext = TransferManager.CurrentBatch;
+            DataContext = Transfers.CurrentBatch;
             dataManager = new DataManager();
             ContentManager.SetShell(this);
             ContentManager.ChangeView<PrefixKeyBoardView>();
         }
 
-        private void ViewButton_Click(object sender, RoutedEventArgs e)
+        private void ViewButtonClick(object sender, RoutedEventArgs e)
         {
-            Type viewSelected = (Type)(sender as FrameworkElement).Tag;
+            var viewSelected = (Type)(sender as FrameworkElement).Tag;
             Button selectedButton = navigationButtons.Where(b => b.Equals(sender)).SingleOrDefault();
             List<Button> buttonsNotSelected = navigationButtons.Where(b => !(b.Equals(sender))).ToList();
 

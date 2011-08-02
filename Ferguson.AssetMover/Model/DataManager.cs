@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections.ObjectModel;
-using Ferguson.AssetMover.Client.Settings;
+﻿using System.Collections.Generic;
 
 namespace Ferguson.AssetMover.Client.Model
 {
@@ -17,10 +12,9 @@ namespace Ferguson.AssetMover.Client.Model
             CreatePrefixes();
         }
 
-
         private void CreatePrefixes()
         {
-            Prefixes = SettingsManager.ClientSettings.CompactKeys;
+            Prefixes = App.ClientSettings.CompactKeys;
         }
     }
 }

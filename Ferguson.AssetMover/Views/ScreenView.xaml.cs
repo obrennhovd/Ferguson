@@ -15,7 +15,7 @@ namespace Ferguson.AssetMover.Client.Views
         {
             InitializeComponent();
             Loaded += new RoutedEventHandler(ScreenView_Loaded);
-            TransferManager.AssetMovementDeleted += new AssetMovementDeletedEventHandler(TransferManager_AssetMovementDeleted);
+            Transfers.AssetMovementDeleted += new AssetMovementDeletedEventHandler(TransferManager_AssetMovementDeleted);
         }
 
         void TransferManager_AssetMovementDeleted(AssetMovement movement)
@@ -80,7 +80,7 @@ namespace Ferguson.AssetMover.Client.Views
 
             if (CurrentAssetMovement.Batch == null)
             {
-                CurrentAssetMovement.Batch = TransferManager.CurrentBatch;
+                CurrentAssetMovement.Batch = Transfers.CurrentBatch;
             }
 
             ResetCurrentAssetMovement();

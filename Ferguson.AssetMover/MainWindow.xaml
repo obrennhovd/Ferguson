@@ -60,17 +60,17 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Button  Grid.Column="0" Style="{StaticResource SelectedViewButtonStyle}" x:Name="prefixViewButton" Click="ViewButton_Click" Tag="{x:Type views:PrefixKeyBoardView}">
+            <Button  Grid.Column="0" Style="{StaticResource SelectedViewButtonStyle}" x:Name="prefixViewButton" Click="ViewButtonClick" Tag="{x:Type views:PrefixKeyBoardView}">
                 <Viewbox>
                     <TextBlock Text="COMPACT" />
                 </Viewbox>
             </Button>
-            <Button Grid.Column="1" Style="{StaticResource ViewButtonStyle}" x:Name="schemaViewButton" Click="ViewButton_Click" Tag="{x:Type views:KeyBoardView}">
+            <Button Grid.Column="1" Style="{StaticResource ViewButtonStyle}" x:Name="schemaViewButton" Click="ViewButtonClick" Tag="{x:Type views:KeyBoardView}">
                 <Viewbox>
                     <TextBlock Text="FULL" />
                 </Viewbox>
             </Button>
-            <Button Grid.Column="2" Style="{StaticResource ViewButtonStyle}" x:Name="elementsListViewButton" Click="ViewButton_Click"  Tag="{x:Type views:RegisteredElementsView}">
+            <Button Grid.Column="2" Style="{StaticResource ViewButtonStyle}" x:Name="elementsListViewButton" Click="ViewButtonClick"  Tag="{x:Type views:RegisteredElementsView}">
                 <Viewbox>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="LOG" VerticalAlignment="Center" />

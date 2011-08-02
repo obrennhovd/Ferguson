@@ -24,7 +24,7 @@ namespace Ferguson.AssetMover.Client.Views
         public RegisteredElementsView()
         {
             InitializeComponent();
-            TransferManager.CurrentBatchChanged += new CurrentBatchChangedEventHandler(TransferManager_CurrentBatchChanged);
+            Transfers.CurrentBatchChanged += new CurrentBatchChangedEventHandler(TransferManager_CurrentBatchChanged);
         }
 
         void TransferManager_CurrentBatchChanged(Batch newBatch)
@@ -34,7 +34,7 @@ namespace Ferguson.AssetMover.Client.Views
 
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            TransferManager.Transfer();
+            Transfers.Transfer();
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -47,7 +47,7 @@ namespace Ferguson.AssetMover.Client.Views
                 window.ConfirmationValue = selectedMovement.UnitNumber;
                 if (window.ShowDialog() == true)
                 {
-                    TransferManager.RemoveAssetMovementFromCurrentBatch(selectedMovement);
+                    Transfers.RemoveAssetMovementFromCurrentBatch(selectedMovement);
                 }
             }
         }
