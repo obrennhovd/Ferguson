@@ -14,8 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <ManifestCertificateThumbprint>D4C6FFF3A57D7B51174EC9F1E3291AF93A152874</ManifestCertificateThumbprint>
-    <ManifestKeyFile>Ferguson.AssetMover.Client_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>03DF3392700A56AF820387EDC4427172195B4A54</ManifestCertificateThumbprint>
+    <ManifestKeyFile>AssetMover.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
     <IsWebBootstrapper>true</IsWebBootstrapper>
@@ -231,8 +231,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="Ferguson.AssetMover.Client_1_TemporaryKey.pfx" />
-    <None Include="Ferguson.AssetMover.Client_TemporaryKey.pfx" />
+    <None Include="AssetMover.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
