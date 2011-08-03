@@ -5,21 +5,20 @@ using System.Text;
 using Ferguson.AssetMover.Client.Model;
 using System.IO;
 using System.Xml.Linq;
-using Ferguson.AssetMover.Client.Settings;
 
 namespace Ferguson.AssetMover.Client.FileExport
 {
     /// <summary>
     /// Public class that maintains a buffer that will be written to disk so data can be retrieved from session to session.
     /// </summary>
-    public class BufferManager
+    public class MovementBuffer
     {
         private List<AssetMovement> _buffer = new List<AssetMovement>();
-        private readonly string filePath = @"C:\Ferguson\buffer.xml";
+        private readonly string _filePath = @"C:\Ferguson\buffer.xml";
 
-        public BufferManager()
+        public MovementBuffer()
         {
-            filePath = App.ClientSettings.BufferFilePath;
+            _filePath = App.ClientSettings.BufferFilePath;
             Load();
         }
 
@@ -61,12 +60,12 @@ namespace Ferguson.AssetMover.Client.FileExport
         private void Load()
         {
             // Check if file exists.
-            if (!File.Exists(filePath))
+            if (!File.Exists(_filePath))
             {
                 FlushBuffer();
             }
 
-            XDocument document = XDocument.Load(filePath);
+            XDocument document = XDocument.Load(_filePath);
             var movements = from movement in document.Descendants("AssetMovement")
                             select new AssetMovement
                             {
@@ -92,7 +91,7 @@ namespace Ferguson.AssetMover.Client.FileExport
                 root.Add(element);
             }
 
-            saveDocument.Save(filePath);
+            saveDocument.Save(_filePath);
 
         }
 

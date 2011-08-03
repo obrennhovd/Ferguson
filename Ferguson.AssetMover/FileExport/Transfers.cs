@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Ferguson.AssetMover.Client.Model;
 using System.IO;
-using System.Windows;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Net.NetworkInformation;
-using Ferguson.AssetMover.Client.Views;
-using System.Windows.Threading;
 using Ferguson.AssetMover.Client.Settings;
 using Ferguson.AssetMover.Views;
 using Ferguson.AssetMover.Client.Network;
@@ -25,9 +18,9 @@ namespace Ferguson.AssetMover.Client.FileExport
         static readonly string exportPath = @"C:\Ferguson\";
         static int _counter = 1;
         static Batch _currentBatch;
-        static ObservableCollection<Batch> transferredBatches = new ObservableCollection<Batch>();
-        static ClientSettings clientSettings;
-        private static BufferManager buffer = new BufferManager();
+        static readonly ObservableCollection<Batch> transferredBatches = new ObservableCollection<Batch>();
+        static readonly ClientSettings clientSettings;
+        private static MovementBuffer buffer = new MovementBuffer();
 
 
         public static event CurrentBatchChangedEventHandler CurrentBatchChanged;
@@ -59,10 +52,10 @@ namespace Ferguson.AssetMover.Client.FileExport
                 {
                     if (_currentBatch != null)
                     {
-                        _currentBatch.AssetMovements.CollectionChanged -= new NotifyCollectionChangedEventHandler(AssetMovements_CollectionChanged);
+                        _currentBatch.AssetMovements.CollectionChanged -= AssetMovementsCollectionChanged;
                     }
                     _currentBatch = value;
-                    _currentBatch.AssetMovements.CollectionChanged += new NotifyCollectionChangedEventHandler(AssetMovements_CollectionChanged);
+                    _currentBatch.AssetMovements.CollectionChanged += AssetMovementsCollectionChanged;
                     if (CurrentBatchChanged != null)
                         CurrentBatchChanged(_currentBatch);
                 }
@@ -70,7 +63,7 @@ namespace Ferguson.AssetMover.Client.FileExport
 
         }
 
-        static void AssetMovements_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        static void AssetMovementsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
@@ -105,7 +98,7 @@ namespace Ferguson.AssetMover.Client.FileExport
             try
             {
                 // Map network drive
-                NetworkDrive oNetDrive = new NetworkDrive();
+                var oNetDrive = new NetworkDrive();
                 // Remove mapping
                 if (Directory.Exists(localDisk))
                 {

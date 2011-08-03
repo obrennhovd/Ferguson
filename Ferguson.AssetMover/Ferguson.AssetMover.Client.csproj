@@ -178,12 +178,12 @@
     <Compile Include="Converters\SelectedToBooleanConverter.cs" />
     <Compile Include="FileExport\BackupManager.cs" />
     <Compile Include="FileExport\Batch.cs" />
-    <Compile Include="FileExport\BufferManager.cs" />
+    <Compile Include="FileExport\MovementBuffer.cs" />
     <Compile Include="FileExport\NetworkDrive.cs" />
     <Compile Include="FileExport\Transfers.cs" />
     <Compile Include="Settings\ClientSettings.cs" />
     <Compile Include="Settings\SettingsFile.cs" />
-    <Compile Include="Settings\SettingsManager.cs" />
+    <Compile Include="Settings\SettingsLoader.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="Views\KeyBoardView.xaml.cs">
       <DependentUpon>KeyBoardView.xaml</DependentUpon>

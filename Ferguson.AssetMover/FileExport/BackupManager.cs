@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Ferguson.AssetMover.Client.Settings;
 using System.IO;
 using Ferguson.AssetMover.Client.Model;
 
@@ -10,7 +8,7 @@ namespace Ferguson.AssetMover.Client.FileExport
 {
     public class BackupManager
     {
-        private static string backupPath = "";
+        private static string _backupPath = "";
         public string InboundReportFile { get; set; }
         public string OutboundReportFile { get; set; }
 
@@ -21,7 +19,7 @@ namespace Ferguson.AssetMover.Client.FileExport
 
         public void Init()
         {
-            backupPath = App.ClientSettings.BackupPath;
+            _backupPath = App.ClientSettings.BackupPath;
             ValidateBackupPath();
             ValidateReportFiles();
         }
@@ -52,7 +50,7 @@ namespace Ferguson.AssetMover.Client.FileExport
             ValidateReportFiles();
 
             StreamWriter sw = File.AppendText(InboundReportFile);
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
 
             foreach (var movement in batch.AssetMovements.Where(m => m.MovementType == MovementType.In))
             {
@@ -60,7 +58,7 @@ namespace Ferguson.AssetMover.Client.FileExport
                 line = line + Space(20 - movement.UnitNumber.Length);
                 line += transferTime.ToString();
                 line = line + Space(15);
-                line += batch.Name.ToString() + ".csv";
+                line += batch.Name + ".csv";
                 builder.AppendLine(line);
             }
             sw.Write(builder.ToString());
@@ -82,8 +80,8 @@ namespace Ferguson.AssetMover.Client.FileExport
             string inboundName = DateTime.Now.ToString("ddMMyyyy") + " - Inbound Total.txt";
             string outboundName = DateTime.Now.ToString("ddMMyyyy") + " - Outbound Total.txt";
             
-            InboundReportFile = backupPath + inboundName;
-            OutboundReportFile = backupPath + outboundName;
+            InboundReportFile = _backupPath + inboundName;
+            OutboundReportFile = _backupPath + outboundName;
         }
 
         /// <summary>
@@ -91,11 +89,11 @@ namespace Ferguson.AssetMover.Client.FileExport
         /// </summary>
         private void ValidateBackupPath()
         {
-            if (backupPath == "") new ApplicationException("The backup path is set to empty");
+            if (_backupPath == "") new ApplicationException("The backup path is set to empty");
 
-            if (!Directory.Exists(backupPath))
+            if (!Directory.Exists(_backupPath))
             {
-                Directory.CreateDirectory(backupPath);
+                Directory.CreateDirectory(_backupPath);
             }
         }
     }

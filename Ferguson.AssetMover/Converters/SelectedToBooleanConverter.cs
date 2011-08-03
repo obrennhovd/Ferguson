@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Data;
 using System.Globalization;
 
-namespace Ferguson.AssetMover.Converters
+namespace Ferguson.AssetMover.Client.Converters
 {
     public class SelectedToBooleanConverter : IValueConverter
     {

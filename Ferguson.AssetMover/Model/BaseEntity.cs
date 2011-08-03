@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace Ferguson.AssetMover.Client.Model
 {
     public class BaseEntity: INotifyPropertyChanged
     {
 
-        private string name;
+        private string _name;
         public string Name
         {
-            get { return name; }
+            get { return _name; }
             set
             {
-                if (name != value)
+                if (_name != value)
                 {
-                    name = value;
+                    _name = value;
                     OnPropertyChanged("Name");
                 }
             }

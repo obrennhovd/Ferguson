@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
 
 namespace Ferguson.AssetMover.Client.Model
@@ -22,29 +19,29 @@ namespace Ferguson.AssetMover.Client.Model
             }
         }
 
-        private string id = "";
+        private string _id = "";
         public string Id
         {
-            get { return id; }
+            get { return _id; }
             set
             {
-                if (id != value)
+                if (_id != value)
                 {
-                    id = value;
+                    _id = value;
                     Notify("Id");
                 }
             }
         }
 
-        private DateTime created = DateTime.Now;
+        private DateTime _created = DateTime.Now;
         public DateTime Created
         {
-            get { return created; }
+            get { return _created; }
             set
             {
-                if (created != value)
+                if (_created != value)
                 {
-                    created = value;
+                    _created = value;
                     Notify("Created");
                 }
             }

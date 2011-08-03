@@ -1,13 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClientSettings>
+  <!-- A disk letter that the app can use to map internally against export path. This is needed to make the connection more stable -->
   <LocalDisk>X:</LocalDisk>
+  <!-- The path to use for local buffer file -->
   <BufferFilePath>C:\Ferguson\AssetMover\Buffer.xml</BufferFilePath>
+  <!-- The path to use for local buffer file -->
   <BackupPath>C:\Ferguson\AssetMover\</BackupPath>
-  <ExportPath>\\fil-ferguson\ops-scans</ExportPath>
-  <!--<ExportPath>\\BYGGMESTER\Ferguson</ExportPath>-->
-  <!--<ExportPath>\\BRIAN-WEBSTEP\Ferguson</ExportPath>-->
+  <!-- The path to where the files should be copied to. This is the external fileshare -->
+  <ExportPath>\\192.168.123.50\ops-scans</ExportPath>
+  <!-- Credentials to be used for the exportpath fileshare -->
   <Username>ute</Username>
   <Password>uteute</Password>
+  <!-- List of keys that can be used for the compact keyboard -->
   <CompactKeys>
     <CompactKey>FCC-</CompactKey>
     <CompactKey>FOT-</CompactKey>

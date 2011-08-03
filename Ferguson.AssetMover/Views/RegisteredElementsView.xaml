@@ -1,11 +1,9 @@
 ﻿<UserControl x:Class="Ferguson.AssetMover.Client.Views.RegisteredElementsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:converter="clr-namespace:Ferguson.AssetMover.Converters"
-    MinHeight="300" MinWidth="600">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Converters="clr-namespace:Ferguson.AssetMover.Client.Converters" MinHeight="300" MinWidth="600">
     <UserControl.Resources>
-        <converter:SelectedToBooleanConverter x:Key="booleanConverter" />
-        <converter:HasItemsToBooleanConverter x:Key="hasItemsConverter" />
+        <Converters:SelectedToBooleanConverter x:Key="booleanConverter" />
+        <Converters:HasItemsToBooleanConverter x:Key="hasItemsConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>

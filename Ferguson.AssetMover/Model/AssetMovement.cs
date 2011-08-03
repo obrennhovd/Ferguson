@@ -18,87 +18,87 @@ namespace Ferguson.AssetMover.Client.Model
 
         public AssetMovement()
         {
-            movementStatus = "Off Hire";
+            _movementStatus = "Off Hire";
             // This property should be read from config
-            consignmentLocation = "FNAS, Tananger";
+            _consignmentLocation = "FNAS, Tananger";
         }
 
-        private Batch batch;
+        private Batch _batch;
         public Batch Batch
         {
-            get { return batch; }
+            get { return _batch; }
             set
             {
-                if (batch != value)
+                if (_batch != value)
                 {
-                    if (batch != null && batch.AssetMovements.Contains(this))
+                    if (_batch != null && _batch.AssetMovements.Contains(this))
                     {
-                        batch.AssetMovements.Remove(this);
+                        _batch.AssetMovements.Remove(this);
                     }
-                    batch = value;
-                    if (batch != null && !batch.AssetMovements.Contains(this))
+                    _batch = value;
+                    if (_batch != null && !_batch.AssetMovements.Contains(this))
                     {
-                        batch.AssetMovements.Add(this);
+                        _batch.AssetMovements.Add(this);
                     }
                     base.OnPropertyChanged("Batch");
                 }
             }
         }
 
-        private string unitNumber = "";
+        private string _unitNumber = "";
         public string UnitNumber
         {
-            get { return unitNumber; }
+            get { return _unitNumber; }
             set
             {
-                if (unitNumber != value)
+                if (_unitNumber != value)
                 {
-                    unitNumber = value;
+                    _unitNumber = value;
                     base.OnPropertyChanged("UnitNumber");
                 }
             }
         }
 
-        private MovementType movementType = MovementType.In;
+        private MovementType _movementType = MovementType.In;
         public MovementType MovementType
         {
-            get { return movementType; }
+            get { return _movementType; }
             set
             {
-                if (movementType != value)
+                if (_movementType != value)
                 {
-                    movementType = value;
+                    _movementType = value;
                     base.OnPropertyChanged("MovementType");
                 }
             }
         }
 
-        private DateTime arrivalDate;
+        private DateTime _arrivalDate;
         public DateTime ArrivalDate
         {
-            get { return arrivalDate; }
+            get { return _arrivalDate; }
             set
             {
-                if (arrivalDate != value)
+                if (_arrivalDate != value)
                 {
-                    arrivalDate = value;
+                    _arrivalDate = value;
                     base.OnPropertyChanged("ArrivalDate");
                 }
             }
         }
 
 
-        private string movementStatus;
+        private readonly string _movementStatus;
         public string MovementStatus
         {
-            get { return movementStatus; }
+            get { return _movementStatus; }
         }
 
 
-        private string consignmentLocation;
+        private readonly string _consignmentLocation;
         public string ConsignmentLocation
         {
-            get { return consignmentLocation; }
+            get { return _consignmentLocation; }
         }
 
         public string GetTransferFormat()
