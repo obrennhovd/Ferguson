@@ -29,7 +29,7 @@
             </ContentControl>
         </Grid>
         
-        <StackPanel d:LayoutOverrides="Margin" HorizontalAlignment="Right" Margin="388.262,-0.415,8,0" Orientation="Horizontal">
+        <StackPanel d:LayoutOverrides="Margin" HorizontalAlignment="Right" Margin="200.262,-0.415,8,0" Orientation="Horizontal">
             <Button Content="Inbound Report" Click="OpenReportButton_Click" Margin="30 0 0 0"  Padding="10 0 10 0"/>
             <Button Content="Outbound Report" Click="OpenReportButton_Click" Margin="30 0 0 0"  Padding="10 0 10 0"/>
             
