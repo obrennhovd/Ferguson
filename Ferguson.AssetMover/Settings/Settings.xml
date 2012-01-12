@@ -7,7 +7,7 @@
   <!-- The path to use for local buffer file -->
   <BackupPath>C:\Ferguson\AssetMover\</BackupPath>
   <!-- The path to where the files should be copied to. This is the external fileshare -->
-  <ExportPath>\\192.168.0.11\ops-scans</ExportPath>
+  <!--<ExportPath>\\192.168.0.11\ops-scans</ExportPath>-->
   <ExportPath>\\Fil-Ferguson\ops-scans</ExportPath> <!-- Liker ikke Ip adresser, map til maskinnavn i host fil -->
   <!-- Credentials to be used for the exportpath fileshare -->
   
