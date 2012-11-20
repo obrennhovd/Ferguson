@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -24,20 +25,22 @@ namespace Ferguson.AssetMover.Client.Views
         public RegisteredElementsView()
         {
             InitializeComponent();
-            Transfers.CurrentBatchChanged += new CurrentBatchChangedEventHandler(TransferManager_CurrentBatchChanged);
+            Transfers.CurrentBatchChanged += TransferManagerCurrentBatchChanged;
         }
 
-        void TransferManager_CurrentBatchChanged(Batch newBatch)
+        void TransferManagerCurrentBatchChanged(Batch newBatch)
         {
             DataContext = newBatch;
         }
 
-        private void SendButton_Click(object sender, RoutedEventArgs e)
+        private void SendButtonClick(object sender, RoutedEventArgs e)
         {
+            ((Batch) DataContext).IsTransferring = true;
             Transfers.Transfer();
+            ((Batch)DataContext).IsTransferring = false;
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private void DeleteButtonClick(object sender, RoutedEventArgs e)
         {
             AssetMovement selectedMovement = elementsList.SelectedValue as AssetMovement;
             if (selectedMovement != null)
@@ -52,7 +55,7 @@ namespace Ferguson.AssetMover.Client.Views
             }
         }
 
-        private void EditButton_Click(object sender, RoutedEventArgs e)
+        private void EditButtonClick(object sender, RoutedEventArgs e)
         {
             AssetMovement selectedMovement = elementsList.SelectedValue as AssetMovement;
             if (selectedMovement != null)

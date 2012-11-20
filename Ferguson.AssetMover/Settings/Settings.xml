@@ -10,7 +10,6 @@
   <!--<ExportPath>\\192.168.0.11\ops-scans</ExportPath>-->
   <ExportPath>\\Fil-Ferguson\ops-scans</ExportPath> <!-- Liker ikke Ip adresser, map til maskinnavn i host fil -->
   <!-- Credentials to be used for the exportpath fileshare -->
-  
   <Username>ute</Username>
   <Password>Juli2011</Password>
   <!-- List of keys that can be used for the compact keyboard -->
@@ -28,6 +27,8 @@
     <CompactKey>FCB-</CompactKey>
     <CompactKey>FRT-</CompactKey>
     <CompactKey>FTB-</CompactKey>
+    <CompactKey>FIBC-</CompactKey>
+    <CompactKey>FGRU-</CompactKey>
     <CompactKey>V</CompactKey>
     <CompactKey>N</CompactKey>
   </CompactKeys>
