@@ -14,11 +14,11 @@ namespace Ferguson.AssetMover.Client.Views
         public ScreenView()
         {
             InitializeComponent();
-            Loaded += new RoutedEventHandler(ScreenView_Loaded);
-            Transfers.AssetMovementDeleted += new AssetMovementDeletedEventHandler(TransferManager_AssetMovementDeleted);
+            Loaded += ScreenView_Loaded;
+            Transfers.AssetMovementDeleted += TransferManagerAssetMovementDeleted;
         }
 
-        void TransferManager_AssetMovementDeleted(AssetMovement movement)
+        void TransferManagerAssetMovementDeleted(AssetMovement movement)
         {
             // if our the Assetmovement that was deleted is our current, we need to clear and reset.
             if (CurrentAssetMovement.Equals(movement))
@@ -34,7 +34,7 @@ namespace Ferguson.AssetMover.Client.Views
 
         void ResetCurrentAssetMovement()
         {
-            AssetMovement movement = new AssetMovement()
+            var movement = new AssetMovement()
             {
                 ArrivalDate = DateTime.Now
             };
@@ -42,15 +42,15 @@ namespace Ferguson.AssetMover.Client.Views
             this.DataContext = CurrentAssetMovement;
         }
 
-        private AssetMovement currentAssetMovement;
+        private AssetMovement _currentAssetMovement;
         public AssetMovement CurrentAssetMovement
         {
-            get { return currentAssetMovement; }
+            get { return _currentAssetMovement; }
             set
             {
-                if (currentAssetMovement != value)
+                if (_currentAssetMovement != value)
                 {
-                    currentAssetMovement = value;
+                    _currentAssetMovement = value;
                     this.DataContext = CurrentAssetMovement;
                     UpdateEnterButtonStatus();
                 }

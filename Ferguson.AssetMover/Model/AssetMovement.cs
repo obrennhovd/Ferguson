@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.ComponentModel;
 using System.Globalization;
 using Ferguson.AssetMover.Client.FileExport;
 
@@ -19,8 +16,7 @@ namespace Ferguson.AssetMover.Client.Model
         public AssetMovement()
         {
             _movementStatus = "Off Hire";
-            // This property should be read from config
-            _consignmentLocation = "FNAS, Tananger";
+            _consignmentLocation = App.ClientSettings.ConsignmentLocation;
         }
 
         private Batch _batch;
@@ -40,7 +36,7 @@ namespace Ferguson.AssetMover.Client.Model
                     {
                         _batch.AssetMovements.Add(this);
                     }
-                    base.OnPropertyChanged("Batch");
+                    OnPropertyChanged("Batch");
                 }
             }
         }
@@ -54,7 +50,7 @@ namespace Ferguson.AssetMover.Client.Model
                 if (_unitNumber != value)
                 {
                     _unitNumber = value;
-                    base.OnPropertyChanged("UnitNumber");
+                    OnPropertyChanged("UnitNumber");
                 }
             }
         }
@@ -68,7 +64,7 @@ namespace Ferguson.AssetMover.Client.Model
                 if (_movementType != value)
                 {
                     _movementType = value;
-                    base.OnPropertyChanged("MovementType");
+                    OnPropertyChanged("MovementType");
                 }
             }
         }
@@ -82,7 +78,7 @@ namespace Ferguson.AssetMover.Client.Model
                 if (_arrivalDate != value)
                 {
                     _arrivalDate = value;
-                    base.OnPropertyChanged("ArrivalDate");
+                    OnPropertyChanged("ArrivalDate");
                 }
             }
         }

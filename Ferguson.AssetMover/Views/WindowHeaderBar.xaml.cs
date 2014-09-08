@@ -17,11 +17,11 @@ namespace Ferguson.AssetMover.Client.Views
 
     public partial class WindowHeaderBar : Page
     {
-        PowerModeChangedEventHandler powerModeChangeHandler;
-        NetworkAvailabilityChangedEventHandler networkChangedHandler;
-        PowerNetworkAware powerAndNetworkStatus;
-        private DispatcherTimer formTimer;
-        private LinearGradientBrush GreyGradientBrush;
+        PowerModeChangedEventHandler _powerModeChangeHandler;
+        NetworkAvailabilityChangedEventHandler _networkChangedHandler;
+        PowerNetworkAware _powerAndNetworkStatus;
+        private DispatcherTimer _formTimer;
+        private LinearGradientBrush _greyGradientBrush;
         private delegate void UpdateNetworkStatusDelegate(); // <- this delegate is needed for calling of "UpdateNetworkStatus" from dispatcher
 
         public WindowHeaderBar()
@@ -29,22 +29,22 @@ namespace Ferguson.AssetMover.Client.Views
             InitializeComponent();
 
             // Initially hide the min and close buttons
-            this.MinimizeControl.Visibility = Visibility.Collapsed;
-            this.CloseControl.Visibility = Visibility.Collapsed;
+            MinimizeControl.Visibility = Visibility.Collapsed;
+            CloseControl.Visibility = Visibility.Collapsed;
         }
 
         void OnLoaded(object sender, RoutedEventArgs e)
         {
             // Create the power and network aware class
-            powerAndNetworkStatus = new PowerNetworkAware();
+            _powerAndNetworkStatus = new PowerNetworkAware();
 
             // Register a delegate for the power related event
-            powerModeChangeHandler = new PowerModeChangedEventHandler(OnPowerModeChange);
-            SystemEvents.PowerModeChanged += powerModeChangeHandler;
+            _powerModeChangeHandler = OnPowerModeChange;
+            SystemEvents.PowerModeChanged += _powerModeChangeHandler;
 
             // Register a delegate for the network related event
-            networkChangedHandler = new NetworkAvailabilityChangedEventHandler(NetworkChange_NetworkAvailabilityChanged);
-            NetworkChange.NetworkAvailabilityChanged += networkChangedHandler;
+            _networkChangedHandler = NetworkChange_NetworkAvailabilityChanged;
+            NetworkChange.NetworkAvailabilityChanged += _networkChangedHandler;
 
             // Wire up power awareness
             UpdatePowerStatus();
@@ -52,16 +52,14 @@ namespace Ferguson.AssetMover.Client.Views
             UpdateNetworkStatus();
 
             // Update the time display
-            this.TimeLabel.Content = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
+            TimeLabel.Content = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
 
             // Set the timer to update the time display
-            formTimer = new DispatcherTimer();
-            formTimer.Interval = TimeSpan.FromSeconds(1d);
-            formTimer.IsEnabled = true;
-            formTimer.Tick += new EventHandler(timer_Tick);
+            _formTimer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(1d), IsEnabled = true};
+            _formTimer.Tick += new EventHandler(timer_Tick);
 
             // Brush used for mouse-over button background
-            GreyGradientBrush = new LinearGradientBrush(Color.FromArgb(155, 55, 55, 55), Color.FromArgb(55, 55, 55, 55), 0.0);
+            _greyGradientBrush = new LinearGradientBrush(Color.FromArgb(155, 55, 55, 55), Color.FromArgb(55, 55, 55, 55), 0.0);
         }
 
         void timer_Tick(object sender, EventArgs e)
@@ -122,7 +120,7 @@ namespace Ferguson.AssetMover.Client.Views
         {
             Border button = (Border)sender;
 
-            button.Background = GreyGradientBrush;
+            button.Background = _greyGradientBrush;
         }
         void BorderMouseLeave(object sender, RoutedEventArgs e)
         {
@@ -180,19 +178,19 @@ namespace Ferguson.AssetMover.Client.Views
         /// </summary>
         void UpdateNetworkStatus()
         {
-            this.powerAndNetworkStatus.EnumerateNetworks();
+            this._powerAndNetworkStatus.EnumerateNetworks();
 
             ToolTip myTooltip = new ToolTip();
-            myTooltip.Content = powerAndNetworkStatus.currentNetworkLabel;
+            myTooltip.Content = _powerAndNetworkStatus.currentNetworkLabel;
             this.NetworkStatusIndicator.ToolTip = myTooltip;
 
             String networkImageName = @"../Images/wirelessgood.ico";
 
-            if (powerAndNetworkStatus.networkStatus == "Disconnected")
+            if (_powerAndNetworkStatus.networkStatus == "Disconnected")
             {
                 networkImageName = @"../Images/wirelessnone.ico";
             }
-            else if (powerAndNetworkStatus.networkStatus == "Connectivity Lo")
+            else if (_powerAndNetworkStatus.networkStatus == "Connectivity Lo")
             {
                 networkImageName = @"../Images/wirelesslow.ico";
             }
@@ -231,12 +229,12 @@ namespace Ferguson.AssetMover.Client.Views
         void UpdatePowerStatus()
         {
             // Update the display to reflect the new power state.
-            powerAndNetworkStatus.UpdatePowerInfo();
+            _powerAndNetworkStatus.UpdatePowerInfo();
 
             // Power icons are: Charging, Full, High, Low, Critical
             string powerIcon;
             string powerImageName = @"../Images/batterygood.ico";
-            if (powerAndNetworkStatus.currentPowerStatus == ManagedPower._ACLineStatus.AC)
+            if (_powerAndNetworkStatus.currentPowerStatus == ManagedPower._ACLineStatus.AC)
             {
                 ACPowerStatusIndicator.Visibility = Visibility.Visible;
             }
@@ -246,13 +244,13 @@ namespace Ferguson.AssetMover.Client.Views
             }
 
             // Set the power tooltipe and icon
-            powerIcon = powerAndNetworkStatus.currentPowerLabel;
+            powerIcon = _powerAndNetworkStatus.currentPowerLabel;
 
-            if (powerAndNetworkStatus.currentBatteryPercentage < 10)
+            if (_powerAndNetworkStatus.currentBatteryPercentage < 10)
             {
                 powerImageName = @"../Images/batterycritical.ico";
             }
-            else if (powerAndNetworkStatus.currentBatteryPercentage < 30)
+            else if (_powerAndNetworkStatus.currentBatteryPercentage < 30)
             {
                 powerImageName = @"../Images/batterylow.ico";
             }
@@ -291,10 +289,15 @@ namespace Ferguson.AssetMover.Client.Views
             {
                 procStartInfo = new ProcessStartInfo("notepad.exe", backupManager.OutboundReportFile);
             }
-            Process process = new Process();
+            var process = new Process();
             process.StartInfo = procStartInfo;
             process.Start();
 
+        }
+
+        private void SettingsClick(object sender, RoutedEventArgs e)
+        {
+            ContentManager.ChangeView(typeof(SettingsView));
         }
     }
 }

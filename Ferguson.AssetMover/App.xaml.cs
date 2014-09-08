@@ -15,7 +15,9 @@ namespace Ferguson.AssetMover.Client
         public App()
         {
             this.DispatcherUnhandledException += new DispatcherUnhandledExceptionEventHandler(App_DispatcherUnhandledException);
-            _clientSettings = new SettingsLoader().GetClientSettings();
+            var settingsLoader = new SettingsLoader();
+            settingsLoader.ResolveSettings();
+            _clientSettings = settingsLoader.GetClientSettings();
             
         }
 

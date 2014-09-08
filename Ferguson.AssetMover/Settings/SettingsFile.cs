@@ -5,32 +5,32 @@ namespace Ferguson.AssetMover.Client.Settings
 {
     public static class SettingsFile
     {
-        private const string settingsFile = @"C:\Ferguson\AssetMover\ClientSettings.xml";
-
-        public static bool Exists()
+        
+        public static bool Exists(string fileName)
         {
-            return File.Exists(settingsFile);
+            return File.Exists(fileName);
         }
 
-        public static void Create(XDocument document)
+        public static void Create(XDocument document, string path)
         {
             // Make sure our file structure is in place
-            if (Directory.Exists(@"C:\Ferguson") == false)
+            var directoryPath = Path.GetDirectoryName(path);
+            var directories = Directory.GetDirectories(directoryPath);
+            foreach (var directory in directories)
             {
-                Directory.CreateDirectory(@"C:\Ferguson");
-            }
-            if (Directory.Exists(@"C:\Ferguson\AssetMover") == false)
-            {
-                Directory.CreateDirectory(@"C:\Ferguson\AssetMover");
+                if (Directory.Exists(directory) == false)
+                {
+                    Directory.CreateDirectory(directory);
+                }    
             }
 
             // then save based on xml file
-            document.Save(settingsFile);
+            document.Save(path);
         }
 
-        public static XDocument Load()
+        public static XDocument Load(string path)
         {
-            XDocument document = XDocument.Load(settingsFile);
+            XDocument document = XDocument.Load(path);
             return document;
         }
     }

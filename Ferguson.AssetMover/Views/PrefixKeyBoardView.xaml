@@ -28,7 +28,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Height="100" Width="130" Tag="{Binding Prefix}" Template="{StaticResource KeyboardButtonTemplate}" />
+                    <Button Height="95" Width="110" Tag="{Binding Prefix}" Template="{StaticResource KeyboardButtonTemplate}" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

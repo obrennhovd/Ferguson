@@ -29,10 +29,11 @@
             </ContentControl>
         </Grid>
         
-        <StackPanel d:LayoutOverrides="Margin" HorizontalAlignment="Right" Margin="200.262,-0.415,8,0" Orientation="Horizontal">
+        <StackPanel d:LayoutOverrides="Margin" HorizontalAlignment="Right" Margin="0,-0.415,8,0" Orientation="Horizontal">
             <Button Content="Inbound Report" Click="OpenReportButton_Click" Margin="30 0 0 0"  Padding="10 0 10 0"/>
             <Button Content="Outbound Report" Click="OpenReportButton_Click" Margin="30 0 0 0"  Padding="10 0 10 0"/>
-            
+            <Button Content="Settings" Click="SettingsClick" Margin="30 0 0 0"  Padding="10 0 10 0"/>
+
             <Grid x:Name="PowerNetworkTimeGrid" Width="Auto" HorizontalAlignment="Right" Height="35">
 
                 <ContentControl x:Name="HelpButton" MouseLeave="ButtonMouseLeave" MouseEnter="ButtonMouseEnter" Template="{DynamicResource ContentControlControlTemplate1}" Foreground="#FFFFFFFF" KeyDown="OnHelpButtonClick" MouseDown="OnHelpButtonClick" TabIndex="1" FontSize="20" Width="46" BorderBrush="#FF000000" d:LayoutOverrides="Width, Margin" HorizontalAlignment="Right" Margin="0,-0.066,-3.167,0" Background="{DynamicResource TriGradientGreyBrush}" ToolTip="Show Application Help">
