@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTemplate x:Key="FolderOpenIcon" TargetType="ContentControl">
+        <Path Data="M0,21.940001L64,21.940001 58.81641,53.042002 5.4832716,53.042002z M5.4829998,0L26.983213,0 26.983213,6.5154943 58.805,6.5154943 58.805,14.362 5.5063095,14.362 5.5063095,7.1121521 5.4829998,7.1121521z" Stretch="Uniform" Fill="{TemplateBinding Foreground}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <TransformGroup.Children>
+                        <RotateTransform Angle="90" />
+                        <ScaleTransform ScaleX="1" ScaleY="1" />
+                    </TransformGroup.Children>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+    </ControlTemplate>
+</ResourceDictionary>

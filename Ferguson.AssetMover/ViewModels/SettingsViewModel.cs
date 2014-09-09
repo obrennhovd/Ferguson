@@ -13,6 +13,45 @@ namespace Ferguson.AssetMover.Client.ViewModels
         {
             FilePath = new SettingsLoader().GetFilePath();
             OpenSettingsFileCommand = new RelayCommand(OpenFile);
+            OpenFolderCommand = new RelayCommand<string>(OpenFolder);
+            OpenFileCommand = new RelayCommand<string>(OpenFileInNotepad);
+        }
+
+        
+
+
+        public ClientSettings Settings
+        {
+            get { return App.ClientSettings; }
+        }
+
+        public ICommand OpenSettingsFileCommand { get; set; }
+        public ICommand OpenFolderCommand { get; set; }
+        public ICommand OpenFileCommand { get; set; }
+
+        private string _filePath;
+        public string FilePath
+        {
+            get
+            {
+                return (_filePath);
+            }
+            set
+            {
+                if (_filePath == value) return;
+                _filePath = value;
+                RaisePropertyChanged(() => FilePath);
+            }
+        }
+
+        private void OpenFileInNotepad(string filePath)
+        {
+            new ApplicationOperations().OpenFileInNotepad(filePath);
+        }
+        
+        private void OpenFolder(string path)
+        {
+            new ApplicationOperations().OpenFolder(path);
         }
 
         private void OpenFile()
@@ -36,6 +75,7 @@ namespace Ferguson.AssetMover.Client.ViewModels
                 {
                     var settingsLoader = new SettingsLoader();
                     settingsLoader.ReplaceSettingsWithFile(fullPath);
+                    MessageBox.Show("The new settings have now been applied. The application will restart to let them have effect.", "Application will restart.", MessageBoxButton.OK, MessageBoxImage.Information);
                     new ApplicationOperations().Restart();
                 }
                 
@@ -44,22 +84,6 @@ namespace Ferguson.AssetMover.Client.ViewModels
             
         }
 
-        public ICommand OpenSettingsFileCommand { get; set; }
-
-        private string _filePath;
-        public string FilePath
-        {
-            get
-            {
-                return (_filePath);
-            }
-            set
-            {
-                if (_filePath == value) return;
-                _filePath = value;
-                RaisePropertyChanged(() => FilePath);
-            }
-        }
 
     }
 }

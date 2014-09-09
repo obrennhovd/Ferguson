@@ -5,6 +5,7 @@ using System.Text;
 using Ferguson.AssetMover.Client.Model;
 using System.IO;
 using System.Xml.Linq;
+using Ferguson.AssetMover.Client.Settings;
 
 namespace Ferguson.AssetMover.Client.FileExport
 {
@@ -18,7 +19,7 @@ namespace Ferguson.AssetMover.Client.FileExport
 
         public MovementBuffer()
         {
-            _filePath = App.ClientSettings.BufferFilePath;
+            _filePath = Path.Combine(ApplicationFolder.GetPath(), "Buffer.xml");
             Load();
         }
 

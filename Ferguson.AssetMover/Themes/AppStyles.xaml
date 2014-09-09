@@ -1,10 +1,15 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
     <Color x:Key="SubtleColor">Silver</Color>
     <SolidColorBrush x:Key="SubtleColorBrush" Color="{StaticResource SubtleColor}" />
+
+    <Color x:Key="AccentColor">#e67e22</Color>
+    <SolidColorBrush x:Key="AccentColorBrush" Color="{StaticResource AccentColor}" />
     
     <Style TargetType="{x:Type TextBlock}">
         <Setter Property="Foreground" Value="White" />
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
     </Style>
     
 </ResourceDictionary>

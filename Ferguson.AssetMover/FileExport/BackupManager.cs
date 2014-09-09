@@ -20,7 +20,6 @@ namespace Ferguson.AssetMover.Client.FileExport
         public void Init()
         {
             _backupPath = App.ClientSettings.BackupPath;
-            ValidateBackupPath();
             ValidateReportFiles();
         }
 
@@ -29,7 +28,7 @@ namespace Ferguson.AssetMover.Client.FileExport
             ValidateReportFiles();
 
             StreamWriter sw = File.AppendText(OutboundReportFile);
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
 
             foreach (var movement in batch.AssetMovements.Where(m => m.MovementType == MovementType.Out))
             {
@@ -79,22 +78,9 @@ namespace Ferguson.AssetMover.Client.FileExport
         {
             string inboundName = DateTime.Now.ToString("ddMMyyyy") + " - Inbound Total.txt";
             string outboundName = DateTime.Now.ToString("ddMMyyyy") + " - Outbound Total.txt";
-            
-            InboundReportFile = _backupPath + inboundName;
-            OutboundReportFile = _backupPath + outboundName;
-        }
 
-        /// <summary>
-        /// Method for validating and making sure the backup path exists.
-        /// </summary>
-        private void ValidateBackupPath()
-        {
-            if (_backupPath == "") new ApplicationException("The backup path is set to empty");
-
-            if (!Directory.Exists(_backupPath))
-            {
-                Directory.CreateDirectory(_backupPath);
-            }
+            InboundReportFile = Path.Combine(_backupPath, inboundName);
+            OutboundReportFile = Path.Combine(_backupPath, outboundName);
         }
     }
 }

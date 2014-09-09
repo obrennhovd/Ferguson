@@ -8,20 +8,14 @@ namespace Ferguson.AssetMover.Client.Settings
     public class SettingsLoader
     {
         private const string fileName = "ClientSettings.xml";
-        private  ClientSettings _clientSettings;
-        private  XDocument _defaultClientSettings;
-        
-        private string _sourceFilePath;
+        private ClientSettings _clientSettings;
+        private XDocument _defaultClientSettings;
+
+
 
         public string GetFilePath()
         {
-            string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            _sourceFilePath = Path.Combine(localAppData, "Ferguson AssetMover");
-            if (!Directory.Exists(_sourceFilePath))
-                Directory.CreateDirectory(_sourceFilePath);
-
-            return Path.Combine(
-             _sourceFilePath, fileName);
+            return Path.Combine(ApplicationFolder.GetPath(), fileName);
         }
 
 
@@ -57,7 +51,7 @@ namespace Ferguson.AssetMover.Client.Settings
             // System Settings
             // Check if file exists
             _defaultClientSettings = GetResourceDocument("../Settings/Settings.xml");
-          
+
             // Read system settings
             var filePath = GetFilePath();
             var fileSettings = GetSettingsFromFile(_defaultClientSettings, filePath);
@@ -65,6 +59,6 @@ namespace Ferguson.AssetMover.Client.Settings
         }
     }
 
-    
+
 }
 
