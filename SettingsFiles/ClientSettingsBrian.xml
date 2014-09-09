@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClientSettings version="2">
+  <!-- C-Map location-->
+  <ConsignmentLocation>FNAS, Tananger</ConsignmentLocation>
+  <!-- A disk letter that the app can use to map internally against export path. This is needed to make the connection more stable -->
+  <LocalDisk>X:</LocalDisk>
+  <!-- The path to use for local buffer file -->
+  <BufferFilePath>C:\Ferguson\AssetMover\Buffer.xml</BufferFilePath>
+  <!-- The path to use for local buffer file -->
+  <BackupPath>C:\Ferguson\AssetMover\</BackupPath>
+  <!-- The path to where the files should be copied to. This is the external fileshare -->
+  <ExportPath>\\localhost\Ferguson</ExportPath>
+  <!-- Liker ikke Ip adresser, map til maskinnavn i host fil -->
+  <!-- Credentials to be used for the exportpath fileshare -->
+  <Username>Brian</Username>
+  <Password>cham1994</Password>
+  <!-- List of keys that can be used for the compact keyboard -->
+  <CompactKeys>
+    <CompactKey>B</CompactKey>
+    <CompactKey>R</CompactKey>
+    <CompactKey>I</CompactKey>
+    <CompactKey>A</CompactKey>
+    <CompactKey>N</CompactKey>
+    <CompactKey>COOL</CompactKey>
+  </CompactKeys>
+</ClientSettings>
