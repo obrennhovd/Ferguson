@@ -36,7 +36,7 @@ namespace Ferguson.AssetMover.Client.FileExport
                 line = line + Space(20 - movement.UnitNumber.Length);
                 line += transferTime.ToString();
                 line = line + Space(15);
-                line += movement.MovementType.ToString();
+                line += batch.Name + ".csv";
                 builder.AppendLine(line);
             }
             sw.Write(builder.ToString());

@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("Ferguson.AssetMover")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Webstep")]
 [assembly: AssemblyProduct("Ferguson.AssetMover")]
 [assembly: AssemblyCopyright("Copyright ©  2009")]
 [assembly: AssemblyTrademark("")]

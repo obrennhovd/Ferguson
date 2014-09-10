@@ -36,11 +36,13 @@
             <TextBlock Grid.Row="1" Text="Filepath" Foreground="{StaticResource SubtleColorBrush}" />
             <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding FilePath}" />
             <Button Grid.Row="1" Grid.Column="2" Content="Open file" Command="{Binding OpenFileCommand}" CommandParameter="{Binding FilePath}" Margin="0 3" />
-            
-            <TextBlock Grid.Row="2" Text="ConsigmentLocation" Foreground="{StaticResource SubtleColorBrush}" FontSize="16" />
-            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Settings.ConsignmentLocation}" FontSize="16" />
 
-            <ContentControl Grid.Row="3" Grid.ColumnSpan="2" Content="Transfer" Style="{StaticResource HeaderBoxStyle}"></ContentControl>
+            <ContentControl Grid.Row="2" Grid.ColumnSpan="2" Content="Transfer" Style="{StaticResource HeaderBoxStyle}"></ContentControl>
+
+
+            <TextBlock Grid.Row="3" Text="ConsigmentLocation" Foreground="{StaticResource SubtleColorBrush}" FontSize="16" />
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Settings.ConsignmentLocation}" FontSize="16" />
+
 
             <TextBlock Grid.Row="4" Text="Export path" Foreground="{StaticResource SubtleColorBrush}" />
             <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Settings.ExportPath}" />
